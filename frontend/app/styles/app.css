@@ -1,5 +1,56 @@
-:root {
-  --color-primary: 176, 151, 106;
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.25;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-width: 320px;
+  color: #333333;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
 }
 
 /*
@@ -414,6 +465,50 @@ video {
   height: auto;
 }
 
+:root {
+  --color-primary: 176, 151, 106;
+}
+
+@font-face {
+  font-weight: 300;
+
+  font-family: "Roboto", sans-serif;
+
+  font-style: normal;
+
+  src: url("/fonts/Roboto-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 400;
+
+  font-family: "Roboto", sans-serif;
+
+  font-style: normal;
+
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 500;
+
+  font-family: "Roboto", sans-serif;
+
+  font-style: normal;
+
+  src: url("/fonts/Roboto-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-weight: 700;
+
+  font-family: "Roboto", sans-serif;
+
+  font-style: normal;
+
+  src: url("/fonts/Roboto-Bold.ttf") format("truetype");
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -577,4 +672,12 @@ video {
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.25;
 }

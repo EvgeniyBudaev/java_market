@@ -8,7 +8,8 @@ export const CatalogMirrorsPage: FC<{catalogMirrors: any}> = ({ catalogMirrors }
     return (
         <>
             <h1 className="text-3xl font-bold underline text-red-600">{t('catalog.catalogMirrors.title')}</h1>
-            <p className="text-3xl font-bold underline text-primary">Hello World!</p>
+            <p className="text-3xl font-bold underline text-primary">Paragraf</p>
+            <div>Simple text</div>
         </>
     )
 }

@@ -1,5 +1,43 @@
-@import "./common.css";
+@import "common.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-weight: 300;
+        font-family: "Roboto", sans-serif;
+        font-style: normal;
+        src: url("/fonts/Roboto-Light.ttf") format("truetype");
+    }
+
+    @font-face {
+        font-weight: 400;
+        font-family: "Roboto", sans-serif;
+        font-style: normal;
+        src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+    }
+
+    @font-face {
+        font-weight: 500;
+        font-family: "Roboto", sans-serif;
+        font-style: normal;
+        src: url("/fonts/Roboto-Medium.ttf") format("truetype");
+    }
+
+    @font-face {
+        font-weight: 700;
+        font-family: "Roboto", sans-serif;
+        font-style: normal;
+        src: url("/fonts/Roboto-Bold.ttf") format("truetype");
+    }
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.25;
+}
