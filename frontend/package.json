@@ -4,21 +4,32 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "start": "remix-serve build"
+    "start": "remix-serve build",
+    "generate:translations": "i18next"
   },
   "dependencies": {
     "@remix-run/node": "^1.6.8",
     "@remix-run/react": "^1.6.8",
     "@remix-run/serve": "^1.6.8",
+    "@sentry/browser": "^7.10.0",
+    "i18next": "^21.9.1",
+    "i18next-browser-languagedetector": "^6.1.5",
+    "i18next-fs-backend": "^1.1.5",
+    "i18next-http-backend": "^1.4.1",
+    "i18next-icu": "^2.0.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-i18next": "^11.18.4",
+    "remix-i18next": "^4.1.1"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.6.8",
     "@remix-run/eslint-config": "^1.6.8",
+    "@types/i18next-fs-backend": "^1.1.2",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "eslint": "^8.20.0",
+    "i18next-parser": "^6.5.0",
     "typescript": "^4.7.4"
   },
   "engines": {

@@ -7,26 +7,47 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import {FC, ReactNode} from 'react'
+import { useTranslation } from 'react-i18next';
+import {useInitLanguage} from "~/hooks";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Java market",
   viewport: "width=device-width,initial-scale=1",
 });
 
-export default function App() {
+const Document: FC<{ children: ReactNode }> = ({ children }) => {
+  const { i18n } = useTranslation();
+  useInitLanguage();
+
   return (
-    <html lang="en">
+      <html lang={i18n.language} dir={i18n.dir()}>
       <head>
+        <meta charSet="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes"
+        />
         <Meta />
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+      {children}
+      <ScrollRestoration />
+      <Scripts />
+      {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
-    </html>
+      </html>
+  );
+};
+
+export default function App() {
+  return (
+    <>
+      <Document>
+        <Outlet />
+      </Document>
+    </>
   );
 }

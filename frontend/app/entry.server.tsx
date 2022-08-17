@@ -1,48 +1,48 @@
-import { PassThrough } from "stream";
-import type { EntryContext } from "@remix-run/node";
-import { Response } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import { renderToPipeableStream } from "react-dom/server";
+import { renderToString } from 'react-dom/server';
+import { RemixServer } from '@remix-run/react';
+import { createInstance } from 'i18next';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import Backend from 'i18next-fs-backend';
+import type { EntryContext } from '@remix-run/server-runtime';
+import { resolve } from 'node:path';
+import { remixI18next } from '~/services';
+import i18nextOptions from '../i18next-options';
+import ICU from 'i18next-icu';
 
-const ABORT_DELAY = 5000;
-
-export default function handleRequest(
-  request: Request,
-  responseStatusCode: number,
-  responseHeaders: Headers,
-  remixContext: EntryContext
+export default async function handleRequest(
+    request: Request,
+    statusCode: number,
+    headers: Headers,
+    context: EntryContext,
 ) {
-  return new Promise((resolve, reject) => {
-    let didError = false;
+    const instance = createInstance();
 
-    let { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} />,
-      {
-        onShellReady: () => {
-          let body = new PassThrough();
+    const lng = 'ru';
+    const ns = remixI18next.getRouteNamespaces(context);
 
-          responseHeaders.set("Content-Type", "text/html");
+    await instance
+        .use(ICU)
+        .use(initReactI18next)
+        .use(Backend)
+        .init({
+            ...i18nextOptions,
+            lng,
+            ns,
+            backend: {
+                loadPath: resolve('./public/locales/{{lng}}/{{ns}}.json'),
+            },
+        });
 
-          resolve(
-            new Response(body, {
-              headers: responseHeaders,
-              status: didError ? 500 : responseStatusCode,
-            })
-          );
-
-          pipe(body);
-        },
-        onShellError: (err) => {
-          reject(err);
-        },
-        onError: (error) => {
-          didError = true;
-
-          console.error(error);
-        },
-      }
+    const markup = renderToString(
+        <I18nextProvider i18n={instance}>
+            <RemixServer context={context} url={request.url} />
+        </I18nextProvider>,
     );
 
-    setTimeout(abort, ABORT_DELAY);
-  });
+    headers.set('Content-Type', 'text/html');
+
+    return new Response('<!DOCTYPE html>' + markup, {
+        status: statusCode,
+        headers: headers,
+    });
 }
