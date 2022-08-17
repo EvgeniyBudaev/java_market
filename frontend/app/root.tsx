@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -7,15 +7,22 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import {FC, ReactNode} from 'react'
-import { useTranslation } from 'react-i18next';
-import {useInitLanguage} from "~/hooks";
+import type { FC, ReactNode } from "react"
+import { useTranslation } from "react-i18next";
+import { useInitLanguage } from "~/hooks";
+import styles from "./styles/app.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Java market",
   viewport: "width=device-width,initial-scale=1",
 });
+
+export const links: LinksFunction = () => {
+    return [
+        { rel: "stylesheet", href: styles }
+    ];
+};
 
 const Document: FC<{ children: ReactNode }> = ({ children }) => {
   const { i18n } = useTranslation();
@@ -36,7 +43,7 @@ const Document: FC<{ children: ReactNode }> = ({ children }) => {
       {children}
       <ScrollRestoration />
       <Scripts />
-      {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+      {process.env.NODE_ENV === "development" ? <LiveReload /> : null}
       </body>
       </html>
   );
