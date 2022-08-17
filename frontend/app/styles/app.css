@@ -673,11 +673,3 @@ video {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
 }
-
-body {
-  font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1.25;
-}
